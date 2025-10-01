@@ -1,3 +1,3 @@
 # Python stuff 
 
-1.Hangman
+1. Hangman
