@@ -1,1 +1,3 @@
-first version of hangman game
+# Python stuff 
+
+1.Hangman
