@@ -24,11 +24,13 @@ print("I am thinking of a number between 1 and 100")
 
 
 
-# levels 
 
-EASY_LEVEL =10
-HARD_lEVEL = 5
 
+
+
+
+
+# ---------------- LEVEL CHOOSER ----------------
 
 
 def level_chooser():
@@ -39,19 +41,24 @@ def level_chooser():
     
     """
 
-    level_chooser = input("Choose a difficulty. Type 'easy' or 'hard':").lower()
+    choice  = input("Choose a difficulty. Type 'easy' or 'hard':").lower().strip()
 
     #level chooser with list
 
-    while  level_chooser  not in ["easy", "hard"]:
+    while  choice  not in ["easy", "hard"]:
         print("Invalid choice. Please type 'easy' or 'hard'.")
-        level_chooser = input("Choose a difficulty: ").lower()
+        choice = input("Choose a difficulty: ").lower().strip()
 
-        """
-        writing a loop to return global variable
+    return 10 if choice == "easy" else 5
 
-        """
-        return EASY_LEVEL if level_chooser == "easy " else HARD_lEVEL
+
+
+
+
+
+
+
+# ---------------- RANDOM NUMBER ----------------
 
 
 
@@ -63,6 +70,15 @@ def target_number():
 
 
 
+
+
+
+
+
+
+
+
+# ------------------------PLAYER GUESS -----------------
 def guess():
 
     """
@@ -73,46 +89,68 @@ def guess():
     while True:
         try:
             user_input = int(input("whats your guess :- "))
-            return user_input
+
+            if 1 <= user_input <=100:
+                return user_input
+            else:
+                print("Please enter a value between 1 and 100")
         except ValueError:
             print("Please enter a valid number between 1 and 100")
 
 
 
-def comapre(user_input_logic,target_logic):
-    if user_input_logic<  target_logic:
-        print("Too Low ")
+
+
+
+
+
+# ---------------- COMPARISON LOGIC ----------------
+
+def comapre(user_guess ,target):
+    
+    if user_guess<  target:
+        print(" Try something Low ")
         return False
-    elif user_input_logic> target_logic:
-        print("Too High")
+    elif user_guess> target:
+        print(" Try something  High")
         return False
     else:
-        print("You guessed it right")
+        print("You guessed it right ,Congrats! You win ")
         return True
     
 
-def game_logic(target_for_logic,attempts):
-    for attempt  in range(attempts,0,-1):
-        print(f"you have {attempt} attempts remaining")
-        user_input_logic = guess()
-    
-    if comapre(user_input_logic,target_logic):
-        return
-    else:
-        if attempt -1>0:
-            print("Guess again")
-        else:
-            print(f"❌ You've run out of guesses. The number was {target_for_logic}.")
-    
 
-    
+
+
+
+
+# ------------------  Game Loop  -----------
+
+
+def game_logic(target,attempts):
+
+    while attempts >0:
+        print(f"\n  You have  {attempts} attempts remaining")
+
+        user_guess = guess()
+
+        is_correct = comapre(user_guess,target)
+        
+        if is_correct:
+            break
+        attempts -=1
+        if attempts ==0:
+            print(f"\n You have run out of guesses.The number was the {target} target .Better luck next time! ")
+
+#---------------Main Function-------------
 
 def play():
-    target = target_number()
     attempts = level_chooser()
+    target = target_number()
     game_logic(target,attempts)
 
+    
 
-
+#------------------Run Game ----------------------
 
 play()
