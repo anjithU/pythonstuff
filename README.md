@@ -9,3 +9,5 @@
 7. Guessing Game
 8. Black Jack Project
 9. Lower or Higher
+10. Coffe Machine
+11. OOP Version of coffe machine
